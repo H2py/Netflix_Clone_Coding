@@ -2,31 +2,29 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 
 function App() {
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const onClick = () => setValue((prev) => prev + 1);
-  const onChange = (event) => setKeyword(event.target.value);
-  console.log("I run all the time");
-  useEffect(() => {
-    console.log("CALL THE API...");
-  }, []);
-  useEffect(() => {
-    if(keyword !=="" & keyword.length > 5) {
-      console.log("SERACH FOR", keyword);
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => setToDo(event.target.value);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (toDo === "") {
+      return;
     }
-  }, [keyword]);
-  useEffect(() => {
-    if(counter !=="") {
-      console.log("I run when 'counter changes");
-    }
-  }, [counter]);
-
-  return (
-    <div>
-      <h1>Welcome Back!</h1>
-      <Button text={"Continue"} />
-    </div>
-  );
+    setToDo("");
+    setToDo(currentArray => []);
+  };
+  console.log(toDo);
+  return <div>
+    <form>
+      <input 
+      onChange={onChange}
+      value={toDo}
+      type="text"
+      placeholder="Write your to do..."
+      />
+    </form>
+    <button>Add To Do</button>
+  </div>
 }
 
 export default App;
